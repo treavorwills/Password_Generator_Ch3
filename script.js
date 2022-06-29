@@ -16,6 +16,9 @@ function generatePassword() {
   var length = passwordLength();
   console.log("Password length: " + length);
 
+  var lowercase = passwordInclude("lower case");
+  console.log("Include lowercase: " + lowercase);
+
   return "poop";
 }
 
@@ -32,3 +35,12 @@ function passwordLength() {
   // return the length
   return length;
 }
+
+// Function to determine whether to include specific character types
+function passwordInclude(type){
+  let include = confirm("Click OK to include " + type + " characters.")
+  
+  return include;
+}
+
+
