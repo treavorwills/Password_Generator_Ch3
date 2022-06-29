@@ -16,8 +16,14 @@ function generatePassword() {
   var length = passwordLength();
   console.log("Password length: " + length);
 
-  var lowercase = passwordInclude("lower case");
-  console.log("Include lowercase: " + lowercase);
+  var characterTypes = ["lowercase", "uppercase", "numeric", "special"]
+
+  var includeArray = new Array(characterTypes.length);
+
+  for (i=0; i<characterTypes.length; i++) {
+    includeArray[i] = passwordInclude(characterTypes[i]);
+    console.log("Include " + characterTypes[i] + " : " + includeArray[i]);  
+  }
 
   return "poop";
 }
@@ -38,9 +44,9 @@ function passwordLength() {
 
 // Function to determine whether to include specific character types
 function passwordInclude(type){
-  let include = confirm("Click OK to include " + type + " characters.")
+  let useCharacter = confirm("Click OK to include " + type + " characters.")
   
-  return include;
+  return useCharacter;
 }
 
 
