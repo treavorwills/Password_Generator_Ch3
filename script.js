@@ -16,6 +16,7 @@ function generatePassword() {
 
   // define the character strings we can use
   var letters = "abcdefghijklmnopqrstuvwxyz";
+  var numeric = "0123456789";
   var specials = "~`!@#$%^&*()-_+=}]{[:;<,>.?/";
 
   // set length equal to the length determined by passwordLength()
@@ -25,13 +26,12 @@ function generatePassword() {
   console.log("Password length: " + length);
 
   // create array to hold the different types of characters desired in a password
-  var characterTypes = ["lowercase", "uppercase", "numeric", "special"]
+  var characterTypes = ["letters", "uppercase", "numeric", "specials"]
 
   // create array equal in length to characterTypes[]
   var includeArray = new Array(characterTypes.length);
 
   // fill the includeArray with booleans corresponding to the characterTypes
-  
   for (i=0; i<characterTypes.length; i++) {
     includeArray[i] = passwordInclude(characterTypes[i]);
     console.log("Include " + characterTypes[i] + " : " + includeArray[i]);  
@@ -46,11 +46,35 @@ function generatePassword() {
     alert("You declined all characters, please begin again.");
     return "Try Again!";
   }
-  
+
+  var includeInPassword = new Array();
+
+  //create a string including ALL characters specified by the user
+  if (includeArray[0] === true) 
+  includeInPassword += letters;
+  console.log(includeInPassword);
+
+  if (includeArray[1] === true) 
+  includeInPassword += letters.toUpperCase();
+  console.log(includeInPassword);
+
+  if (includeArray[2] === true) 
+  includeInPassword += numeric;
+  console.log(includeInPassword);
+
+  if (includeArray[3] === true) 
+  includeInPassword += specials;
+  console.log(includeInPassword);
+
   //create a string the length of the password required for each character type desired
+  var passwordArray = new Array();
+  for (i=0; i < length; i++) {
+    var randomNumber = Math.floor(Math.random() * includeInPassword.length);
+    passwordArray[i] = includeInPassword[randomNumber];
+  }
 
-
-  return "poop";
+  console.log("The password array is: " + passwordArray);
+  return passwordArray.join("");
 }
 
 // Function to prompt the user for desired password length, between 8 and 128
